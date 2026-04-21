@@ -9,7 +9,7 @@ scale_fill_oucru_d <- function(
 ) {
   discrete_scale(
     aesthetics = "fill",
-    palette = palette_gen(palette, direction),
+    palette = palette_gen_d(palette, direction),
     ...
   )
 }
@@ -25,7 +25,7 @@ scale_color_oucru_d <- function(
 ) {
   discrete_scale(
     aesthetics = "color",
-    palette = palette_gen(palette, direction),
+    palette = palette_gen_d(palette, direction),
     ...
   )
 }
@@ -41,7 +41,7 @@ scale_colour_oucru_d <- function(
 ) {
   discrete_scale(
     aesthetics = "colour",
-    palette = palette_gen(palette, direction),
+    palette = palette_gen_d(palette, direction),
     ...
   )
 }
