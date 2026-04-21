@@ -19,5 +19,5 @@ Fetch OUCRU color palette by name (if it is defined)
 }
 \examples{
 # example code
-oucru_palette("main")
+oucru::oucru_palette("main")
 }

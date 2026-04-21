@@ -17,5 +17,5 @@ Fetch OUCRU color by names (if it is defined)
 }
 \examples{
 # example code
-oucru_color("blue", "orange")
+oucru::oucru_color("blue", "orange")
 }

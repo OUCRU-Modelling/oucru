@@ -25,9 +25,10 @@ OUCRU_COLS <- c(
 #'
 #' @param ... Color names as strings
 #' @returns Named list of colors, or full color list if `...` is NULL
+#' @export
 #' @examples
 #' # example code
-#' oucru_color("blue", "orange")
+#' oucru::oucru_color("blue", "orange")
 oucru_color <- function(...) {
   cols <- c(...)
 
@@ -55,9 +56,10 @@ OUCRU_PALS <- list(
 #' @param palette Palette name
 #' @param ... unused
 #' @returns OUCRU color palette
+#' @export
 #' @examples
 #' # example code
-#' oucru_palette("main")
+#' oucru::oucru_palette("main")
 oucru_palette <- function(palette = "main", ...) {
   OUCRU_PALS[[palette]]
 }
