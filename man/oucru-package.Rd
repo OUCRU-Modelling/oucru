@@ -4,9 +4,9 @@
 \name{oucru-package}
 \alias{oucru}
 \alias{oucru-package}
-\title{oucru: Helper and miscellaneous functions used for and by the Oxford University Clinical Research Unit (OUCRU), Vietnam}
+\title{oucru: Collection of helper and miscellaneous functions used for and by the Oxford University Clinical Research Unit (OUCRU), Vietnam}
 \description{
-Helper and miscellaneous functions used for and by the Oxford University Clinical Research Unit (OUCRU), Vietnam.
+Collection of helper and miscellaneous functions used for and by the Oxford University Clinical Research Unit (OUCRU), Vietnam.
 }
 \author{
 \strong{Maintainer}: Tuyen Huynh \email{tuyenhn@oucru.org}
