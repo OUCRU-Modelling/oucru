@@ -18,8 +18,8 @@ pak::pak("OUCRU-Modelling/oucru")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
+### OUCRU colors and palette
+Basic example for using OUCRU color palette for `ggplot2`
 ``` r
 library(ggplot2)
 library(oucru)
