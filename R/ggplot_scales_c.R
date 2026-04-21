@@ -1,6 +1,7 @@
 #' `ggplot2` fill colors for continuous scale
 #' @param palette OUCRU palette name
 #' @param direction Palette direction, 0 or positive number means forward, negative means backward
+#' @param ... Passed to `ggplot2::continuous_scale()`
 #' @export
 scale_fill_oucru_c <- function(
   palette = "main",
@@ -17,6 +18,7 @@ scale_fill_oucru_c <- function(
 #' `ggplot2` geom colors for continuous scale
 #' @param palette OUCRU palette name
 #' @param direction Palette direction, 0 or positive number means forward, negative means backward
+#' @param ... Passed to `ggplot2::continuous_scale()`
 #' @export
 scale_color_oucru_c <- function(
   palette = "main",
@@ -33,6 +35,7 @@ scale_color_oucru_c <- function(
 #' `ggplot2` geom colors for continuous scale
 #' @param palette OUCRU palette name
 #' @param direction Palette direction, 0 or positive number means forward, negative means backward
+#' @param ... Passed to `ggplot2::continuous_scale()`
 #' @export
 scale_colour_oucru_c <- function(
   palette = "main",

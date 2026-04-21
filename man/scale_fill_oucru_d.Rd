@@ -10,6 +10,8 @@ scale_fill_oucru_d(palette = "main", direction = 1, ...)
 \item{palette}{OUCRU palette name}
 
 \item{direction}{Palette direction, 0 or positive number means forward, negative means backward}
+
+\item{...}{Passed to \code{ggplot2::discrete_scale()}}
 }
 \description{
 \code{ggplot2} fill colors for discrete scale
