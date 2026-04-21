@@ -21,6 +21,7 @@ pak::pak("OUCRU-Modelling/oucru")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
+library(ggplot2)
 library(oucru)
 
 # use OUCRU palette for ggplot2 scales
