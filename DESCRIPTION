@@ -12,3 +12,5 @@ Imports:
     cli,
     ggplot2,
     grDevices
+Suggests: 
+    devtools
