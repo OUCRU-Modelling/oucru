@@ -1,0 +1,121 @@
+#' Internal constructor for discrete or continuous ggplot scales
+#' @param aes The ggplot aesthetic mapping, e.g. "fill" or "color"
+#' @param type Aesthetic scale type, either "d" (discrete) or "c" (continuous)
+#' @param palette OUCRU palette name
+#' @param direction Palette direction, 0 or positive number means forward, negative means backward
+#' @param ... Passed to `ggplot2::discrete_scale()` or `ggplot2::continuous_scale()`
+#' @noRd
+.scale_oucru <- function(
+  aes,
+  type = c("d", "c"),
+  palette = "main",
+  direction = 1,
+  ...
+) {
+  type <- match.arg(type)
+  switch(
+    type,
+    d = discrete_scale(
+      aesthetics = aes,
+      palette = palette_gen_d(palette, direction),
+      ...
+    ),
+    c = continuous_scale(
+      aesthetics = aes,
+      palette = palette_gen_c(palette, direction),
+      ...
+    )
+  )
+}
+
+#' `ggplot2` fill colors for continuous scale
+#' @param palette OUCRU palette name
+#' @param direction Palette direction, 0 or positive number means forward, negative means backward
+#' @param ... Passed to `ggplot2::continuous_scale()`
+#' @export
+scale_fill_oucru_c <- function(palette = "main", direction = 1, ...) {
+  .scale_oucru(
+    aes = "fill",
+    type = "c",
+    palette = palette,
+    direction = direction,
+    ...
+  )
+}
+
+
+#' `ggplot2` geom colors for continuous scale
+#' @param palette OUCRU palette name
+#' @param direction Palette direction, 0 or positive number means forward, negative means backward
+#' @param ... Passed to `ggplot2::continuous_scale()`
+#' @export
+scale_color_oucru_c <- function(palette = "main", direction = 1, ...) {
+  .scale_oucru(
+    aes = "color",
+    type = "c",
+    palette = palette,
+    direction = direction,
+    ...
+  )
+}
+
+#' `ggplot2` geom colors for continuous scale
+#' @param palette OUCRU palette name
+#' @param direction Palette direction, 0 or positive number means forward, negative means backward
+#' @param ... Passed to `ggplot2::continuous_scale()`
+#' @export
+scale_colour_oucru_c <- function(palette = "main", direction = 1, ...) {
+  .scale_oucru(
+    aes = "colour",
+    type = "c",
+    palette = palette,
+    direction = direction,
+    ...
+  )
+}
+
+#' `ggplot2` fill colors for discrete scale
+#' @param palette OUCRU palette name
+#' @param direction Palette direction, 0 or positive number means forward, negative means backward
+#' @param ... Passed to `ggplot2::continuous_scale()`
+#' @export
+scale_fill_oucru_d <- function(palette = "main", direction = 1, ...) {
+  .scale_oucru(
+    aes = "fill",
+    type = "d",
+    palette = palette,
+    direction = direction,
+    ...
+  )
+}
+
+
+#' `ggplot2` geom colors for discrete scale
+#' @param palette OUCRU palette name
+#' @param direction Palette direction, 0 or positive number means forward, negative means backward
+#' @param ... Passed to `ggplot2::continuous_scale()`
+#' @export
+scale_color_oucru_d <- function(palette = "main", direction = 1, ...) {
+  .scale_oucru(
+    aes = "color",
+    type = "d",
+    palette = palette,
+    direction = direction,
+    ...
+  )
+}
+
+#' `ggplot2` geom colors for discrete scale
+#' @param palette OUCRU palette name
+#' @param direction Palette direction, 0 or positive number means forward, negative means backward
+#' @param ... Passed to `ggplot2::continuous_scale()`
+#' @export
+scale_colour_oucru_d <- function(palette = "main", direction = 1, ...) {
+  .scale_oucru(
+    aes = "colour",
+    type = "d",
+    palette = palette,
+    direction = direction,
+    ...
+  )
+}
