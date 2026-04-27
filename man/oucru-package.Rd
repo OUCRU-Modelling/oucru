@@ -8,6 +8,13 @@
 \description{
 Collection of helper and miscellaneous functions used for and by the Oxford University Clinical Research Unit (OUCRU), Vietnam.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://oucru-modelling.github.io/oucru/}
+}
+
+}
 \author{
 \strong{Maintainer}: Tuyen Huynh \email{tuyenhn@oucru.org}
 
