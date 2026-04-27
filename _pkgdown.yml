@@ -2,3 +2,14 @@ url: https://oucru-modelling.github.io/oucru/
 template:
   bootstrap: 5
 
+reference:
+  - title: OUCRU themes and colors
+    desc: Functions related to OUCRU official brand guideline themes and colors
+  - subtitle: "`ggplot2` scales"
+    desc: Functions for `ggplot2` scales coloring
+  - contents: starts_with("scale_")
+  - subtitle: Miscellanous color functions
+  - contents:
+      - starts_with("OUCRU_")
+      - starts_with("palette_")
+      - starts_with("oucru_")
