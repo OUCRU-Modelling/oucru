@@ -82,8 +82,8 @@ sstable.baseline <- function(
   ## y must be categorical variable
   if (!is.null(y)) {
     if (
-      all(!c("character", "factor", "logical") %in% class(y)) |
-        (any(c("numeric", "integer") %in% class(y)) &
+      !any(c("character", "factor", "logical") %in% class(y)) ||
+        (any(c("numeric", "integer") %in% class(y)) &&
           length(unique(na.omit(y))) > 5)
     ) {
       stop("Column-wise variable must be categorical !!!")
@@ -126,29 +126,25 @@ sstable.baseline <- function(
     ifelse(varlist_lower %in% cate_lower, FALSE, NA)
   ) #assign var type
 
-  continuous <- sapply(1:ncol(x), function(i) {
+  continuous <- sapply(seq_len(ncol(x)), function(i) {
     out <- ifelse(
       is.na(continuous[i]),
-      ifelse(
-        any(c("factor", "character", "logical") %in% class(x[, i])) |
-          (any(c("numeric", "integer") %in% class(x[, i])) &
-            length(unique(na.omit(x[, i]))) <= 5),
-        FALSE,
-        TRUE
-      ),
+      !(any(c("factor", "character", "logical") %in% class(x[, i])) ||
+        (any(c("numeric", "integer") %in% class(x[, i])) &&
+          length(unique(na.omit(x[, i]))) <= 5)),
       continuous[i]
     )
     return(out)
   })
 
-  for (i in (1:ncol(x))) {
-    if (continuous[i] == FALSE & !is.factor(x[, i])) {
+  for (i in (seq_len(ncol(x)))) {
+    if (!continuous[i] && !is.factor(x[, i])) {
       x[, i] <- factor(x[, i], levels = sort(unique(na.omit(x[, i]))))
     }
   }
 
   ## if z exists, x must be categorical
-  if (!is.null(z) & any(continuous == TRUE)) {
+  if (!is.null(z) && any(continuous)) {
     stop(
       "Row-wise variable must be categorical when third dimension variable exists !!!"
     )
@@ -157,8 +153,8 @@ sstable.baseline <- function(
   ## if use by-row layout, x must be categorical
   #browser()
   if (
-    bycol == FALSE &
-      any(sapply(1:ncol(x), function(i) is.factor(x[, i])) == FALSE)
+    !bycol &&
+      !all(sapply(seq_len(ncol(x)), function(i) is.factor(x[, i])))
   ) {
     stop("Row-wise variable must be categorical in by-row layout !!!")
   }
@@ -327,7 +323,7 @@ sstable.baseline <- function(
   ## get summary
   value <- do.call(
     rbind,
-    lapply(1:ncol(x), function(i) {
+    lapply(seq_len(ncol(x)), function(i) {
       sstable.baseline.each(
         varname = varname[i][[1]],
         label_list = label_list[i][[1]],
@@ -584,7 +580,7 @@ sstable.baseline.each <- function(
   #   }
 
   mycont.summary <- function(x, y, z) {
-    ngroup <- length(levels(y))
+    ngroup <- nlevels(y)
 
     if (is.null(z)) {
       summarystat.nice <- by(
@@ -620,14 +616,14 @@ sstable.baseline.each <- function(
       )
       n <- table(x, y)
 
-      result <- matrix("", ncol = ngroup * 2 + 1, nrow = length(levels(x)) + 1)
-      result[1, seq(2, ncol(result), by = 2)] <- apply(n, 2, sum)
+      result <- matrix("", ncol = ngroup * 2 + 1, nrow = nlevels(x) + 1)
+      result[1, seq(2, ncol(result), by = 2)] <- colSums(n)
       result[2:nrow(result), seq(2, ncol(result), by = 2)] <- n
       result[2:nrow(result), 1] <- paste0(
         "- ",
         levels(x),
         " (n = ",
-        apply(n, 1, sum),
+        rowSums(n),
         ")"
       )
 
@@ -644,7 +640,7 @@ sstable.baseline.each <- function(
       }
     }
 
-    if (test == TRUE & ngroup > 1) {
+    if (test && ngroup > 1) {
       # overall Kruskal-Wallis test for group differences
       if (is.null(z)) {
         m <- 1:(length(x) * (1 - 0.5 * as.numeric(pooledGroup)))
@@ -659,7 +655,7 @@ sstable.baseline.each <- function(
         )
         result <- cbind(result, pval)
       } else {
-        pval <- sapply(1:length(levels(x)), function(i) {
+        pval <- sapply(seq_along(levels(x)), function(i) {
           q <- which(x == levels(x)[i])
           if (length(q) == 0) {
             out <- NA
@@ -710,22 +706,22 @@ sstable.baseline.each <- function(
   }
 
   mycat.summary <- function(x, y, z, fullfreq = fullfreq) {
-    ngroup <- length(levels(y))
-    result <- matrix("", ncol = ngroup * 2 + 1, nrow = length(levels(x)) + 1)
+    ngroup <- nlevels(y)
+    result <- matrix("", ncol = ngroup * 2 + 1, nrow = nlevels(x) + 1)
 
     if (is.null(z)) {
       ta <- table(x, y)
       n <- if (bycol) {
-        apply(ta, 2, sum)
+        colSums(ta)
       } else {
         if (pooledGroup) {
-          apply(ta[, -ncol(ta)], 1, sum)
+          rowSums(ta[, -ncol(ta)])
         } else {
-          apply(ta, 1, sum)
+          rowSums(ta)
         }
       }
       ta.prop <- if (bycol) {
-        unclass(ta / rep(n, each = length(levels(x))))
+        unclass(ta / rep(n, each = nlevels(x)))
       } else {
         unclass(ta / rep(n, ngroup))
       }
@@ -747,7 +743,7 @@ sstable.baseline.each <- function(
           result[2:nrow(result), seq(3, ncol(result), by = 2)] <- paste0(
             ta,
             "/",
-            rep(apply(ta, 2, sum), each = length(levels(x))),
+            rep(colSums(ta), each = nlevels(x)),
             ta.nice
           )
         } else {
@@ -786,7 +782,7 @@ sstable.baseline.each <- function(
       }
       ta.nice <- matrix(
         by(z, list(x, y), function(z) {
-          ta <- sum(z == TRUE, na.rm = TRUE)
+          ta <- sum(z, na.rm = TRUE)
           n <- length(na.omit(z))
           if (fullfreq) {
             output <- paste0(
@@ -813,15 +809,15 @@ sstable.baseline.each <- function(
         "- ",
         levels(x),
         " (n=",
-        apply(tn2, 1, sum),
+        rowSums(tn2),
         ")"
       )
       result[2:nrow(result), seq(3, ncol(result), by = 2)] <- ta.nice
-      result[1, seq(2, ncol(result), by = 2)] <- apply(tn, 2, sum)
+      result[1, seq(2, ncol(result), by = 2)] <- colSums(tn)
       result[2:nrow(result), seq(2, ncol(result), by = 2)] <- tn
     }
 
-    if (test == TRUE & ngroup > 1) {
+    if (test && ngroup > 1) {
       if (is.null(z)) {
         m <- 1:(length(x) * (1 - 0.5 * as.numeric(pooledGroup)))
         pval <- if (chisq.test) {
@@ -861,7 +857,7 @@ sstable.baseline.each <- function(
         result <- cbind(result, "")
         result[1, ngroup * 2 + 2] <- pval
       } else {
-        pval <- sapply(1:length(levels(x)), function(i) {
+        pval <- sapply(seq_along(levels(x)), function(i) {
           q <- which(x == levels(x)[i])
           if (length(q) == 0) {
             out <- NA
@@ -943,7 +939,7 @@ sstable.baseline.edit <- function(
   test = FALSE,
   pdigits = 3,
   pcutoff = 0.0001,
-  keepEmptyString = T,
+  keepEmptyString = TRUE,
   chisq.test = FALSE,
   correct = FALSE,
   simulate.p.value = FALSE,
@@ -969,8 +965,8 @@ sstable.baseline.edit <- function(
   ## y must be categorical variable
   if (!is.null(y)) {
     if (
-      all(!c("character", "factor", "logical") %in% class(y)) |
-        (any(c("numeric", "integer") %in% class(y)) &
+      !any(c("character", "factor", "logical") %in% class(y)) ||
+        (any(c("numeric", "integer") %in% class(y)) &&
           length(unique(na.omit(y))) > 5)
     ) {
       stop("Column-wise variable must be categorical !!!")
@@ -1013,29 +1009,25 @@ sstable.baseline.edit <- function(
     ifelse(varlist_lower %in% cate_lower, FALSE, NA)
   ) #assign var type
 
-  continuous <- sapply(1:ncol(x), function(i) {
+  continuous <- sapply(seq_len(ncol(x)), function(i) {
     out <- ifelse(
       is.na(continuous[i]),
-      ifelse(
-        any(c("factor", "character", "logical") %in% class(x[, i])) |
-          (any(c("numeric", "integer") %in% class(x[, i])) &
-            length(unique(na.omit(x[, i]))) <= 5),
-        FALSE,
-        TRUE
-      ),
+      !(any(c("factor", "character", "logical") %in% class(x[, i])) ||
+        (any(c("numeric", "integer") %in% class(x[, i])) &&
+          length(unique(na.omit(x[, i]))) <= 5)),
       continuous[i]
     )
     return(out)
   })
 
-  for (i in (1:ncol(x))) {
-    if (continuous[i] == FALSE & !is.factor(x[, i])) {
+  for (i in (seq_len(ncol(x)))) {
+    if (!continuous[i] && !is.factor(x[, i])) {
       x[, i] <- factor(x[, i], levels = sort(unique(na.omit(x[, i]))))
     }
   }
 
   ## if z exists, x must be categorical
-  if (!is.null(z) & any(continuous == TRUE)) {
+  if (!is.null(z) && any(continuous)) {
     stop(
       "Row-wise variable must be categorical when third dimension variable exists !!!"
     )
@@ -1044,8 +1036,8 @@ sstable.baseline.edit <- function(
   ## if use by-row layout, x must be categorical
   #browser()
   if (
-    bycol == FALSE &
-      any(sapply(1:ncol(x), function(i) is.factor(x[, i])) == FALSE)
+    !bycol &&
+      !all(sapply(seq_len(ncol(x)), function(i) is.factor(x[, i])))
   ) {
     stop("Row-wise variable must be categorical in by-row layout !!!")
   }
@@ -1094,10 +1086,10 @@ sstable.baseline.edit <- function(
 
   # update order of variable customize for sstable.baseline.edit - hungtt
   value <- as.data.frame(value)
-  dummy_df <- data.frame(V1 = varname, order = seq(1:length(varname)) * 1000)
+  dummy_df <- data.frame(V1 = varname, order = seq(seq_along(varname)) * 1000)
   value <- full_join(value, dummy_df, by = join_by(V1))
 
-  for (i in 1:nrow(value)) {
+  for (i in seq_len(nrow(value))) {
     if (is.na(value[i, ncol(value)])) {
       value[i, ncol(value)] <- (value[i - 1, ncol(value)]) + 1
     }
@@ -1145,14 +1137,14 @@ sstable.baseline.edit <- function(
   footer2 <- footer1 <- footer1.after <- footer.con <- footer.cat <- NULL
 
   #### summary statistics
-  if ((is.null(z) & any(continuous)) | (!is.null(z) & !is.factor(z))) {
+  if ((is.null(z) && any(continuous)) || (!is.null(z) & !is.factor(z))) {
     footer.con <- paste0(
       paste(statistics, collapse = ", "),
       " for numeric variable(s)."
     )
   }
 
-  if ((is.null(z) & any(continuous == FALSE)) | (!is.null(z) & is.factor(z))) {
+  if ((is.null(z) && !all(continuous)) || (!is.null(z) & is.factor(z))) {
     footer.cat <- "absolute count (%) for categorical variable(s)"
   }
 
@@ -1170,7 +1162,7 @@ sstable.baseline.edit <- function(
   #### test
   if (test) {
     footer2.cat <- paste(
-      ifelse(chisq.test == FALSE, "Fisher's exact test", "Chi-squared test"),
+      ifelse(!chisq.test, "Fisher's exact test", "Chi-squared test"),
       "for categorical variable(s)"
     )
     footer2.con <- "Kruskal-Wallis/Mann-Whitney U-test for continuous variable(s)."
@@ -1220,7 +1212,7 @@ sstable.baseline.edit <- function(
         text = paste0(
           "flextable::set_header_labels(tab,",
           paste(
-            paste0("V", 1:length(header1)),
+            paste0("V", seq_along(header1)),
             paste0("'", header1, "'"),
             sep = "=",
             collapse = ","
@@ -1235,7 +1227,7 @@ sstable.baseline.edit <- function(
         text = paste0(
           "flextable::add_header(tab,",
           paste(
-            paste0("V", 1:length(header1)),
+            paste0("V", seq_along(header1)),
             paste0("'", header2, "'"),
             sep = "=",
             collapse = ","
@@ -1249,12 +1241,12 @@ sstable.baseline.edit <- function(
     tab <- flextable::merge_v(tab, part = "header")
 
     ## footer
-    for (k in (1:length(footer))) {
+    for (k in (seq_along(footer))) {
       tab <- flextable::add_footer(tab, V1 = footer[k], top = FALSE)
       tab <- flextable::merge_at(
         tab,
         i = k,
-        j = 1:length(header1),
+        j = seq_along(header1),
         part = "footer"
       )
     }
@@ -1270,7 +1262,7 @@ sstable.baseline.edit <- function(
     tab <- flextable::bg(
       tab,
       i = seq(from = 1, to = nrow(value), by = 2),
-      j = 1:length(header1),
+      j = seq_along(header1),
       bg = bg,
       part = "body"
     )
