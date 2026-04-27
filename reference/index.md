@@ -1,31 +1,12 @@
 # Package index
 
-## All functions
+## OUCRU themes and colors
 
-- [`OUCRU_COLS`](https://oucru-modelling.github.io/oucru/reference/OUCRU_COLS.md)
-  : Define OUCRU colors based on the brand guideline
+Functions related to OUCRU official brand guideline themes and colors
 
-- [`OUCRU_PALS`](https://oucru-modelling.github.io/oucru/reference/OUCRU_PALS.md)
-  : Define OUCRU palettes based on the brand guideline
+### `ggplot2` scales
 
-- [`oucru_color()`](https://oucru-modelling.github.io/oucru/reference/oucru_color.md)
-  : Fetch OUCRU color by names (if it is defined)
-
-- [`oucru_list_pals()`](https://oucru-modelling.github.io/oucru/reference/oucru_list_pals.md)
-  : List OUCRU palettes
-
-- [`oucru_palette()`](https://oucru-modelling.github.io/oucru/reference/oucru_palette.md)
-  : Fetch OUCRU color palette by name (if it is defined)
-
-- [`palette_gen_c()`](https://oucru-modelling.github.io/oucru/reference/palette_gen_c.md)
-  :
-
-  Palette generator for continuous scale (used by `ggplot2`)
-
-- [`palette_gen_d()`](https://oucru-modelling.github.io/oucru/reference/palette_gen_d.md)
-  :
-
-  Palette generator for discrete scale (used by `ggplot2`)
+Functions for `ggplot2` scales coloring
 
 - [`scale_color_oucru_c()`](https://oucru-modelling.github.io/oucru/reference/scale_color_oucru_c.md)
   :
@@ -56,3 +37,30 @@
   :
 
   `ggplot2` fill colors for discrete scale
+
+### Miscellanous color functions
+
+- [`OUCRU_COLS`](https://oucru-modelling.github.io/oucru/reference/OUCRU_COLS.md)
+  : Define OUCRU colors based on the brand guideline
+
+- [`OUCRU_PALS`](https://oucru-modelling.github.io/oucru/reference/OUCRU_PALS.md)
+  : Define OUCRU palettes based on the brand guideline
+
+- [`palette_gen_c()`](https://oucru-modelling.github.io/oucru/reference/palette_gen_c.md)
+  :
+
+  Palette generator for continuous scale (used by `ggplot2`)
+
+- [`palette_gen_d()`](https://oucru-modelling.github.io/oucru/reference/palette_gen_d.md)
+  :
+
+  Palette generator for discrete scale (used by `ggplot2`)
+
+- [`oucru_color()`](https://oucru-modelling.github.io/oucru/reference/oucru_color.md)
+  : Fetch OUCRU color by names (if it is defined)
+
+- [`oucru_list_pals()`](https://oucru-modelling.github.io/oucru/reference/oucru_list_pals.md)
+  : List OUCRU palettes
+
+- [`oucru_palette()`](https://oucru-modelling.github.io/oucru/reference/oucru_palette.md)
+  : Fetch OUCRU color palette by name (if it is defined)
