@@ -10,6 +10,8 @@ reference:
   - contents: starts_with("scale_")
   - subtitle: Miscellanous color functions
   - contents:
-      - starts_with("OUCRU_")
-      - starts_with("palette_")
+      - ".scale_oucru"
+      - "OUCRU_COLS"
+      - "OUCRU_PALS"
       - starts_with("oucru_")
+      - starts_with("palette_")
