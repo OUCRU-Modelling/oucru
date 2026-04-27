@@ -23,11 +23,26 @@ Basic example for using OUCRU color palette for `ggplot2`
 library(ggplot2)
 library(oucru)
 
-# use OUCRU palette for ggplot2 scales
-ggplot(mpg, aes(hwy, class, fill = drv)) +
-  geom_violin(show.legend = FALSE) +
-  scale_fill_oucru_d(palette = "main")
+p <- ggplot(mpg, aes(hwy, class, fill = drv)) +
+  geom_violin(show.legend = FALSE)
+
+# typical figure with viridis colors
+p +
+  scale_fill_viridis_d() +
+  ggtitle("Using viridis colors")
 ```
+
+![](reference/figures/README-ggplot-examples-1.png)
+
+``` r
+
+# use OUCRU main color palette
+p +
+  scale_fill_oucru_d(palette = "main") +
+  ggtitle("Using OUCRU colors")
+```
+
+![](reference/figures/README-ggplot-examples-2.png)
 
 # Package index
 
