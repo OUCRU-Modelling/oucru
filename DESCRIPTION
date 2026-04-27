@@ -10,8 +10,15 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports: 
     cli,
+    dplyr,
+    flextable,
     ggplot2,
-    grDevices
+    grDevices,
+    magrittr,
+    officer,
+    stats
 Suggests: 
+    devtools,
+    testthat (>= 3.0.0)
     devtools
 URL: https://oucru-modelling.github.io/oucru/
