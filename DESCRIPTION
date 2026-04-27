@@ -20,6 +20,5 @@ Imports:
 Suggests: 
     devtools,
     testthat (>= 3.0.0)
-    devtools
 URL: https://oucru-modelling.github.io/oucru/
 Config/testthat/edition: 3
