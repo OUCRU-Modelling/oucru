@@ -13,3 +13,15 @@ reference:
       - "oucru_color"
       - "oucru_palette"
       - "oucru_list_pals"
+
+  - title: Generate report tables
+    desc: These functions' purpose are to generate report tables, outputting a
+      `flextable` or a intermediate object of class `ss_table` for post-hoc
+      manipulation
+  - subtitle: Generate baseline table 1
+  - contents:
+      - starts_with("sstable.baseline")
+  - subtitle: Report table helper functions
+  - contents:
+      - "contSummary"
+      - "getlabel"
