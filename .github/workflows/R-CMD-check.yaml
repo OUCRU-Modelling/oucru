@@ -15,7 +15,7 @@ on:
       - "NAMESPACE"
       - "DESCRIPTION"
 
-name: R-CMD-check.yaml
+name: "R CMD check"
 
 permissions: read-all
 
