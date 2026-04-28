@@ -3,6 +3,11 @@
 Collection of helper and miscellaneous functions used for and by the
 Oxford University Clinical Research Unit (OUCRU), Vietnam
 
+CI/CD statuses:
+
+- [![R-CMD-check](https://github.com/OUCRU-Modelling/oucru/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/OUCRU-Modelling/oucru/actions/workflows/R-CMD-check.yaml)
+- [![pkgdown.yaml](https://github.com/OUCRU-Modelling/oucru/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/OUCRU-Modelling/oucru/actions/workflows/pkgdown.yaml)
+
 ## Installation
 
 You can install the development version of oucru from
