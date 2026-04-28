@@ -1,0 +1,30 @@
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - ".github/workflows/*.yaml"
+      - "R/**/*.R"
+  pull_request:
+    paths:
+      - ".github/workflows/*.yaml"
+      - "R/**/*.R"
+
+name: format-and-lint
+
+permissions: read-all
+
+jobs:
+  jarl-check:
+    name: jarl-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.2
+      - uses: etiennebacher/setup-jarl@v0.1.1
+
+  air-check:
+    name: Install and run Air check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.2
+      - uses: posit-dev/setup-air@v1
+      - run: air format . --check
