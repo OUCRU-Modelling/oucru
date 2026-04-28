@@ -17,6 +17,10 @@
 
 \item{...}{Passed to \code{ggplot2::discrete_scale()} or \code{ggplot2::continuous_scale()}}
 }
+\value{
+\code{ggplot2::discrete_scale()} or \code{ggplot2::continuous_scale()}
+}
 \description{
 Internal constructor for discrete or continuous ggplot scales
 }
+\keyword{internal}

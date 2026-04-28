@@ -1,7 +1,3 @@
-#' Functions and constants defining OUCRU colors and palettes based on the
-#' brand guideline
-#' @export
-#' @name oucru_cols_and_pal
 OUCRU_COLS <- c(
   `blue` = "#002147",
   `blue1` = "#002147",
@@ -23,15 +19,13 @@ OUCRU_COLS <- c(
   `white` = "#ffffff"
 )
 
-
+#' Functions to fetch OUCRU colors and palettes based on the brand guideline
 #' @param ... Color names as strings
-#' @returns Named list of colors, or full color list if `...` is NULL
 #' @export
 #' @examples
-#' # example code
 #' oucru::oucru_color("blue", "orange")
 #'
-#' @rdname oucru_cols_and_pal
+#' @name oucru_cols_and_pal
 oucru_color <- function(...) {
   cols <- c(...)
 
@@ -42,9 +36,6 @@ oucru_color <- function(...) {
   OUCRU_COLS[cols]
 }
 
-
-#' @export
-#' @rdname oucru_cols_and_pal
 OUCRU_PALS <- list(
   `group1` = oucru_color("blue1", "blue2", "blue3", "blue3"),
   `group2` = oucru_color("blue1", "blue2", "blue3", "blue3"),
@@ -56,10 +47,8 @@ OUCRU_PALS <- list(
 )
 
 #' @param palette Palette name, check available palettes with `oucru_list_pals()`
-#' @returns OUCRU color palette
 #' @export
 #' @examples
-#' # example code
 #' oucru::oucru_palette("main")
 #'
 #' @rdname oucru_cols_and_pal
@@ -67,6 +56,9 @@ oucru_palette <- function(palette = "main") {
   OUCRU_PALS[[palette]]
 }
 
+#' @examples
+#' oucru::oucru_list_pals()
+#'
 #' @export
 #' @rdname oucru_cols_and_pal
 oucru_list_pals <- function() {
@@ -77,9 +69,7 @@ oucru_list_pals <- function() {
 #' Palette generator for use by `ggplot2`
 #' @param palette OUCRU palette name
 #' @param direction Palette direction, 0 or positive number means forward, negative means backward
-#' @param ... Passed to `grDevices::colorRampPalette()`
-#' @export
-#' @name oucru_pal_gen
+#' @keywords internal
 palette_gen_d <- function(palette = "main", direction = 1) {
   function(n) {
     if (n > length(oucru_palette(palette))) {
@@ -93,8 +83,10 @@ palette_gen_d <- function(palette = "main", direction = 1) {
   }
 }
 
-#' @export
-#' @rdname oucru_pal_gen
+#' Palette generator for use by `ggplot2`
+#' @inheritParams palette_gen_d
+#' @param ... Passed to `grDevices::colorRampPalette()`
+#' @keywords internal
 palette_gen_c <- function(palette = "main", direction = 1, ...) {
   pal <- oucru_palette(palette)
   pal <- if (direction >= 0) pal else rev(pal)

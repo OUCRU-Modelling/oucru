@@ -4,6 +4,8 @@
 #' @param palette OUCRU palette name
 #' @param direction Palette direction, 0 or positive number means forward, negative means backward
 #' @param ... Passed to `ggplot2::discrete_scale()` or `ggplot2::continuous_scale()`
+#' @returns `ggplot2::discrete_scale()` or `ggplot2::continuous_scale()`
+#' @keywords internal
 .scale_oucru <- function(
   aes,
   type = c("d", "c"),
@@ -30,7 +32,7 @@
 #' OUCRU colors for `ggplot2` scales
 #' @param palette OUCRU palette name
 #' @param direction Palette direction, 0 or positive number means forward, negative means backward
-#' @param ... Passed to `ggplot2::continuous_scale()`
+#' @param ... Passed to `ggplot2::discrete_scale()` or `ggplot2::continuous_scale()`
 #' @export
 #' @name ggplot_scales
 scale_fill_oucru_c <- function(palette = "main", direction = 1, ...) {

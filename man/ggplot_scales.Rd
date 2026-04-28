@@ -27,7 +27,7 @@ scale_colour_oucru_d(palette = "main", direction = 1, ...)
 
 \item{direction}{Palette direction, 0 or positive number means forward, negative means backward}
 
-\item{...}{Passed to \code{ggplot2::continuous_scale()}}
+\item{...}{Passed to \code{ggplot2::discrete_scale()} or \code{ggplot2::continuous_scale()}}
 }
 \description{
 OUCRU colors for \code{ggplot2} scales
