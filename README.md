@@ -3,14 +3,17 @@
 
 # oucru
 
+<!-- badges: start -->
+
+[![R CMD
+check](https://github.com/OUCRU-Modelling/oucru/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/OUCRU-Modelling/oucru/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/OUCRU-Modelling/oucru/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/OUCRU-Modelling/oucru/actions/workflows/pkgdown.yaml)
+[![Format and
+lint](https://github.com/OUCRU-Modelling/oucru/actions/workflows/format-and-lint.yaml/badge.svg)](https://github.com/OUCRU-Modelling/oucru/actions/workflows/format-and-lint.yaml)
+<!-- badges: end -->
+
 Collection of helper and miscellaneous functions used for and by the
 Oxford University Clinical Research Unit (OUCRU), Vietnam
-
-CI/CD statuses: <!-- badges: start -->
-
-- [![R-CMD-check](https://github.com/OUCRU-Modelling/oucru/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/OUCRU-Modelling/oucru/actions/workflows/R-CMD-check.yaml)
-- [![pkgdown.yaml](https://github.com/OUCRU-Modelling/oucru/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/OUCRU-Modelling/oucru/actions/workflows/pkgdown.yaml)
-  <!-- badges: end -->
 
 ## Installation
 
