@@ -32,4 +32,6 @@ scale_colour_oucru_d(palette = "main", direction = 1, ...)
 - ...:
 
   Passed to
+  [`ggplot2::discrete_scale()`](https://ggplot2.tidyverse.org/reference/discrete_scale.html)
+  or
   [`ggplot2::continuous_scale()`](https://ggplot2.tidyverse.org/reference/continuous_scale.html)

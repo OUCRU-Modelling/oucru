@@ -1,6 +1,6 @@
-# Palette generator for discrete scale (used by `ggplot2`)
+# Palette generator for use by `ggplot2`
 
-Palette generator for discrete scale (used by `ggplot2`)
+Palette generator for use by `ggplot2`
 
 ## Usage
 

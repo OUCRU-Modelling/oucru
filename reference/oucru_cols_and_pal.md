@@ -1,27 +1,17 @@
-# Functions and constants defining OUCRU colors and palettes based on the brand guideline
+# Functions to fetch OUCRU colors and palettes based on the brand guideline
 
-Functions and constants defining OUCRU colors and palettes based on the
-brand guideline
+Functions to fetch OUCRU colors and palettes based on the brand
+guideline
 
 ## Usage
 
 ``` r
-OUCRU_COLS
-
 oucru_color(...)
-
-OUCRU_PALS
 
 oucru_palette(palette = "main")
 
 oucru_list_pals()
 ```
-
-## Format
-
-An object of class `character` of length 18.
-
-An object of class `list` of length 7.
 
 ## Arguments
 
@@ -33,22 +23,45 @@ An object of class `list` of length 7.
 
   Palette name, check available palettes with `oucru_list_pals()`
 
-## Value
-
-Named list of colors, or full color list if `...` is NULL
-
-OUCRU color palette
-
 ## Examples
 
 ``` r
-# example code
 oucru::oucru_color("blue", "orange")
 #>      blue    orange 
 #> "#002147" "#e08200" 
 
-# example code
 oucru::oucru_palette("main")
 #>     blue1    orange   yellow1   yellow2   yellow3 
 #> "#002147" "#e08200" "#f5cf47" "#ffe3c4" "#fff7f0" 
+
+oucru::oucru_list_pals()
+#> $group1
+#>     blue1     blue2     blue3     blue3 
+#> "#002147" "#45697d" "#87bfbd" "#87bfbd" 
+#> 
+#> $group2
+#>     blue1     blue2     blue3     blue3 
+#> "#002147" "#45697d" "#87bfbd" "#87bfbd" 
+#> 
+#> $group3
+#>     blue1     white 
+#> "#002147" "#ffffff" 
+#> 
+#> $group4
+#>     blue1    orange   yellow1   yellow2   yellow3 
+#> "#002147" "#e08200" "#f5cf47" "#ffe3c4" "#fff7f0" 
+#> 
+#> $main
+#>     blue1    orange   yellow1   yellow2   yellow3 
+#> "#002147" "#e08200" "#f5cf47" "#ffe3c4" "#fff7f0" 
+#> 
+#> $group5
+#>     blue1    green1    green2    green3 
+#> "#002147" "#004047" "#b5c48a" "#ebf2c2" 
+#> 
+#> $alert
+#>      red2      red1     blue1 
+#> "#730d0d" "#bf1c1c" "#002147" 
+#> 
+#> ℹ Check the official brand guideline for more information
 ```
