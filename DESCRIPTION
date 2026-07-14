@@ -13,5 +13,10 @@ Imports:
     ggplot2,
     grDevices
 Suggests: 
-    devtools
+    devtools,
+    sf
 URL: https://oucru-modelling.github.io/oucru/
+Depends: 
+    R (>= 3.5)
+LazyData: true
+LazyDataCompression: bzip2

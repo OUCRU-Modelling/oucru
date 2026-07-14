@@ -13,3 +13,8 @@ reference:
       - "oucru_color"
       - "oucru_palette"
       - "oucru_list_pals"
+
+  - title: Datasets
+    desc: Pre-made datasets useful for OUCRU analyses
+  - subtitle: Ho Chi Minh City shapefiles
+  - contents: "hcmc_shapefiles"
