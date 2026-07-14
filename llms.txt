@@ -9,7 +9,8 @@ You can install the development version of oucru from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("pak")
+
+install.packages("pak")
 pak::pak("OUCRU-Modelling/oucru")
 ```
 
@@ -20,6 +21,7 @@ pak::pak("OUCRU-Modelling/oucru")
 Basic example for using OUCRU color palette for `ggplot2`
 
 ``` r
+
 library(ggplot2)
 library(oucru)
 
@@ -35,6 +37,7 @@ p +
 ![](reference/figures/README-ggplot-examples-1.png)
 
 ``` r
+
 
 # use OUCRU main color palette
 p +
