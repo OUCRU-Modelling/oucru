@@ -25,3 +25,12 @@ Functions for `ggplot2` scales coloring
   [`oucru_list_pals()`](https://oucru-modelling.github.io/oucru/reference/oucru_cols_and_pal.md)
   : Functions to fetch OUCRU colors and palettes based on the brand
   guideline
+
+## Datasets
+
+Pre-made datasets useful for OUCRU analyses
+
+### Ho Chi Minh City shapefiles
+
+- [`hcmc_shapefiles`](https://oucru-modelling.github.io/oucru/reference/hcmc_shapefiles.md)
+  : Ho Chi Minh City shapefiles data
