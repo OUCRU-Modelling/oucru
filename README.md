@@ -21,7 +21,7 @@ You can install the development version of oucru from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("pak")
+install.packages("pak")
 pak::pak("OUCRU-Modelling/oucru")
 ```
 
