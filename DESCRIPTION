@@ -1,6 +1,6 @@
 Package: oucru
 Title: Collection of helper and miscellaneous functions used for and by the Oxford University Clinical Research Unit (OUCRU), Vietnam
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("Tuyen", "Huynh", , "tuyenhn@oucru.org", role = c("aut", "cre"))
 Description: Collection of helper and miscellaneous functions used for and by the Oxford University Clinical Research Unit (OUCRU), Vietnam.
